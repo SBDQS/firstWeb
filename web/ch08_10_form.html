@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>表单验证</title>
+    <meta content="text/html;charset=UTF-8" http-equiv="content-type">
+    <script type="text/javascript" src="ajax.js"></script>
+    <script type="text/javascript">
+        function formCheck() {
+            var url = "FormCheckServlet";
+            var params = "userId=" + userid.value + "&userPwd=" + userpwd.value;
+            sendRequest(url,params,'POST',showResult);
+        }
+        function showResult() {
+            if (httpRequest.readyState == 4) {
+                if (httpRequest.status == 200) {
+                    var info=httpRequest.responseText;
+                    document.getElementById("result").innerHTML=info;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+请输入用户名:<input type="text" name="userId" id="userid" onblur="formCheck()"><br>
+请输入密码:<input type="password" name="userPwd" id="userpwd"><br>
+<input type="button" value="登录" onclick="formCheck()">
+<div id="result"></div>
+</body>
+</html>
